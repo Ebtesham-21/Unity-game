@@ -11,8 +11,12 @@ public class CoinWallet : NetworkBehaviour
     {
         if(!col.TryGetComponent<Coin>(out Coin coin)) {return;}
 
-        coin.Collect();
-        
+        int coinValue = coin.Collect();
+
+        if(!IsServer) {return;}
+
+        TotalCoins.Value += coinValue;
+
     }
 
 
